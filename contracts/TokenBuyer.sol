@@ -182,7 +182,7 @@ contract TokenBuyer is OwnableUpgradeable {
 
         uint256 minTokenExpected = tokenExpected * (PERCENT_DENOMINATOR - slippage) / PERCENT_DENOMINATOR;
 
-        address[] memory pathToSell;
+        address[] memory pathToSell = new address[](2);
         pathToSell[0] = tokenToSell;
         pathToSell[1] = intermediaryToken;
         //toSell -> intermediaryToken
@@ -195,7 +195,7 @@ contract TokenBuyer is OwnableUpgradeable {
 
         minTokenExpected = tokenExpected * (PERCENT_DENOMINATOR - slippage) / PERCENT_DENOMINATOR;
         //intermediaryToken -> toBuy
-        address[] memory pathToBuy;
+        address[] memory pathToBuy = new address[](2);
         pathToBuy[0] = intermediaryToken;
         pathToBuy[1] = tokenToBuy;
         swapExactTokensForTokens(amounts[1], tokenExpected, pairIntermediaryTokenToBuy, to, pathToBuy, deadline);
@@ -210,12 +210,12 @@ contract TokenBuyer is OwnableUpgradeable {
 
         uint256 minTokenExpected = tokenExpected * (PERCENT_DENOMINATOR - slippage) / PERCENT_DENOMINATOR;
         //toSell -> intermediaryToken
-        address[] memory pathToSell;
+        address[] memory pathToSell = new address[](2);
         pathToSell[0] = tokenToSell;
         pathToSell[1] = intermediaryToken;
         uint[] memory amounts = swapTokensForExactTokens(amountOut, amountOut * (PERCENT_DENOMINATOR - slippage) / PERCENT_DENOMINATOR, pathToSell, to, pairTokenToSellIntermediary, deadline);
         //intermediaryToken -> toBuy
-        address[] memory pathToBuy;
+        address[] memory pathToBuy = new address[](2);
         pathToBuy[0] = intermediaryToken;
         pathToBuy[1] = tokenToBuy;
         {
